@@ -10736,40 +10736,48 @@ end)
 
 
 
-local commandScriptContent = game:HttpGet("https://raw.githubusercontent.com/AzureEpic/orion/refs/heads/main/customcmds.lua") -- Or however you get the script content
 
-local success, chunk = pcall(loadstring, commandScriptContent)
+
+
+-- In your Origin Script
+
+-- ... (Your global definitions: didYouMean, doPREDICTION, adminName, Window, ParseArguments, Spawn, DoNotif, Concat, Insert, Format, ContextActionService) ...
+
+local commandScriptContent = game:HttpGet("https://raw.githubusercontent.com/AzureEpic/orion/refs/heads/main/customcmds.lua") -- Make sure this URL is correct and accessible
+
+local success, chunk_or_error_msg = pcall(loadstring, commandScriptContent)
 
 if success then
-    -- Get the current global environment of this (origin) script
     local origin_env = getfenv(0)
+    setfenv(chunk_or_error_msg, origin_env) -- Use chunk_or_error_msg as the chunk function
 
-    -- Set the environment of the loaded chunk to the origin script's environment
-    setfenv(chunk, origin_env)
-
-    -- *** Crucially: Execute the chunk and capture its return value ***
-    local runSuccess, returned_cmd_table = pcall(chunk)
+    -- Crucially: Execute the chunk and capture its return value
+    local runSuccess, returned_value = pcall(chunk_or_error_msg) -- Capture the actual returned value here
 
     if runSuccess then
-        -- Assign the returned table to a local variable in the origin script
-        -- This is the 'cmd' table from your called script!
-        local myCommands = returned_cmd_table
-
-        if myCommands and type(myCommands) == "table" and myCommands.run then
+        -- Check if the returned_value is what we expect (the cmd table)
+        if returned_value and type(returned_value) == "table" and returned_value.run then
+            local myCommands = returned_value -- This is your 'cmd' table from the other script!
             print("Commands script loaded and 'cmd' table received successfully!")
-            -- Now you can use myCommands.run, myCommands.add, etc.
-            myCommands.run({"debugtest"})
-            -- You can even add more commands from the origin script if needed:
-            -- myCommands.add({"newcommand"}, {"info"}, function() print("Hello from new command!") end)
+            myCommands.run({"debugtest"}) -- Test a command
+            -- You can now use myCommands.add(), myCommands.run(), myCommands.loop(), etc.
         else
-            warn("Commands script did not return a valid 'cmd' table.")
+            warn("Commands script did not return a valid 'cmd' table. Returned type: " .. type(returned_value))
+            if returned_value == nil then
+                warn("Returned value was nil. This might indicate an unhandled error in the called script before its return statement.")
+            end
         end
     else
-        warn("Error running commands script: " .. returned_cmd_table) -- runMsg is now in returned_cmd_table
+        -- If runSuccess is false, returned_value is the error message
+        warn("Error running commands script: " .. returned_value)
     end
 else
-    warn("Error loading commands script: " .. chunk) -- chunk is the error message here
+    warn("Error loading commands script content (loadstring failed): " .. chunk_or_error_msg)
 end
+
+
+
+
 
 
 
