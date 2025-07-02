@@ -10729,27 +10729,54 @@ cmd.add({"firework"}, {"firework", "pop"}, function()
 	end))
 end)
 
+
+
+
+
+
+
+
 local commandScriptContent = game:HttpGet("https://raw.githubusercontent.com/AzureEpic/orion/refs/heads/main/customcmds.lua") -- Or however you get the script content
 
 local success, chunk = pcall(loadstring, commandScriptContent)
 
 if success then
     -- Get the current global environment of this (origin) script
-    local origin_env = getfenv(0) -- 0 refers to the current global environment
+    local origin_env = getfenv(0)
 
     -- Set the environment of the loaded chunk to the origin script's environment
     setfenv(chunk, origin_env)
 
-    -- Now, execute the chunk. It will use the origin_env for its globals.
-    local runSuccess, runMsg = pcall(chunk)
-    if not runSuccess then
-        warn("Error running commands script: " .. runMsg)
+    -- *** Crucially: Execute the chunk and capture its return value ***
+    local runSuccess, returned_cmd_table = pcall(chunk)
+
+    if runSuccess then
+        -- Assign the returned table to a local variable in the origin script
+        -- This is the 'cmd' table from your called script!
+        local myCommands = returned_cmd_table
+
+        if myCommands and type(myCommands) == "table" and myCommands.run then
+            print("Commands script loaded and 'cmd' table received successfully!")
+            -- Now you can use myCommands.run, myCommands.add, etc.
+            myCommands.run({"debugtest"})
+            -- You can even add more commands from the origin script if needed:
+            -- myCommands.add({"newcommand"}, {"info"}, function() print("Hello from new command!") end)
+        else
+            warn("Commands script did not return a valid 'cmd' table.")
+        end
     else
-        print("Commands script loaded and executed successfully!")
+        warn("Error running commands script: " .. returned_cmd_table) -- runMsg is now in returned_cmd_table
     end
 else
-    warn("Error loading commands script: " .. chunk)
+    warn("Error loading commands script: " .. chunk) -- chunk is the error message here
 end
+
+
+
+
+
+
+
 
 
 
