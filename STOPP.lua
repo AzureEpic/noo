@@ -1,5 +1,3 @@
-_G.GravityAPI = _G.GravityAPI or {}
-
 local _p = game:WaitForChild("Players")
 local _plr = _p.ChildAdded:Wait()
 if _plr == _p.LocalPlayer then
@@ -11539,33 +11537,35 @@ end
 
 Controller.GetGravityUp = GetGravityUp
 
+-- [ ADD THIS CODE TO THE END OF YOUR SCRIPT ]
 
--- This function will be accessible globally
+-- This creates a global table that your other scripts can access.
+_G.GravityAPI = {}
+
+-- This function will toggle the gravity controller on and off.
 function _G.GravityAPI:Toggle()
-    if (Controller) then
-        Controller:Destroy()
-        Controller = nil
-        print("Gravity Controller: Disabled")
-    else
-        Controller = GravityController.new(PLAYERS.LocalPlayer)
-        Controller.GetGravityUp = GetGravityUp
-        print("Gravity Controller: Enabled")
-    end
-end
-
-
--- E is toggle
-game:GetService("ContextActionService"):BindAction("Toggle", function(action, state, input)
-	if not (state == Enum.UserInputState.Begin) then
-		return
-	end
-	
 	if (Controller) then
 		Controller:Destroy()
 		Controller = nil
+		print("Gravity Controller: OFF")
 	else
 		Controller = GravityController.new(PLAYERS.LocalPlayer)
 		Controller.GetGravityUp = GetGravityUp
+		print("Gravity Controller: ON")
 	end
+end
+
+-- This is a helper function to check if the controller is active.
+function _G.GravityAPI:IsActive()
+	return Controller ~= nil
+end
+
+-- This replaces the old keybind logic to use the new API function.
+game:GetService("ContextActionService"):UnbindAction("Toggle") -- Remove the old one first
+game:GetService("ContextActionService"):BindAction("Toggle", function(action, state)
+    if state == Enum.UserInputState.Begin then
+	    _G.GravityAPI:Toggle()
+    end
 end, false, Enum.KeyCode.Z)
-print("end")
+
+print("Gravity Controller API Loaded.")
