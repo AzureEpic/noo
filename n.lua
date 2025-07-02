@@ -10729,7 +10729,28 @@ cmd.add({"firework"}, {"firework", "pop"}, function()
 	end))
 end)
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/AzureEpic/orion/refs/heads/main/customcmds"))()
+local commandScriptContent = game:HttpGet("https://raw.githubusercontent.com/AzureEpic/orion/refs/heads/main/customcmds.lua") -- Or however you get the script content
+
+local success, chunk = pcall(loadstring, commandScriptContent)
+
+if success then
+    -- Get the current global environment of this (origin) script
+    local origin_env = getfenv(0) -- 0 refers to the current global environment
+
+    -- Set the environment of the loaded chunk to the origin script's environment
+    setfenv(chunk, origin_env)
+
+    -- Now, execute the chunk. It will use the origin_env for its globals.
+    local runSuccess, runMsg = pcall(chunk)
+    if not runSuccess then
+        warn("Error running commands script: " .. runMsg)
+    else
+        print("Commands script loaded and executed successfully!")
+    end
+else
+    warn("Error loading commands script: " .. chunk)
+end
+
 
 
 
