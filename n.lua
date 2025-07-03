@@ -1,4 +1,4 @@
---[[
+o--[[
 
 
 ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -10736,8 +10736,34 @@ end)
 
 
 
+-- In your Origin Script, at a point that executes very early (e.g., near the top, before other significant logic)
+
+local commandScriptContent = game:HttpGet("https://raw.githubusercontent.com/AzureEpic/orion/refs/heads/main/customcmds.lua") -- VERIFY THIS URL
+local success, chunk_or_error_msg = pcall(loadstring, commandScriptContent)
+
+if success then
+    local origin_env = getfenv(0)
+    setfenv(chunk_or_error_msg, origin_env)
+
+    local runSuccess, returned_cmd_table = pcall(chunk_or_error_msg)
+    if runSuccess then
+        -- This is the crucial step: Make your loaded command system available globally
+        _G.cmd = returned_cmd_table
+        print("Commands script loaded and global '_G.cmd' set successfully!")
+    else
+        warn("Error running commands script: " .. returned_cmd_table)
+    end
+else
+    warn("Error loading commands script content: " .. chunk_or_error_msg)
+end
+
+-- After this block, _G.cmd should now hold your external command system.
 
 
+
+
+
+--[[
 
 -- In your Origin Script
 
@@ -10775,7 +10801,7 @@ else
     warn("Error loading commands script content (loadstring failed): " .. chunk_or_error_msg)
 end
 
-
+]]
 
 
 
