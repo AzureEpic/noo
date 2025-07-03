@@ -10736,9 +10736,13 @@ end)
 
 
 
--- In your Origin Script, at a point that executes very early (e.g., near the top, before other significant logic)
+-- In your Origin Script
 
-local commandScriptContent = game:HttpGet("https://raw.githubusercontent.com/AzureEpic/orion/refs/heads/main/customcmds.lua") -- VERIFY THIS URL
+-- (1) -- Your existing global definitions and utility functions (didYouMean, Window, Spawn, etc.)
+-- ... (ensure they are defined) ...
+
+-- (2) -- Your existing code to load the external commands script
+local commandScriptContent = game:HttpGet("https://raw.githubusercontent.com/AzureEpic/orion/refs/heads/main/n.lua") -- VERIFY THIS URL
 local success, chunk_or_error_msg = pcall(loadstring, commandScriptContent)
 
 if success then
@@ -10747,9 +10751,50 @@ if success then
 
     local runSuccess, returned_cmd_table = pcall(chunk_or_error_msg)
     if runSuccess then
-        -- This is the crucial step: Make your loaded command system available globally
+        -- This step is correct: Make your loaded command system available globally
         _G.cmd = returned_cmd_table
         print("Commands script loaded and global '_G.cmd' set successfully!")
+
+        -- *** NEW STEP (3): Populate NAEXECDATA with the newly loaded commands ***
+
+        -- Ensure NAEXECDATA is initialized, if it hasn't been already.
+        -- This line might already exist higher up in your script, but ensure it's executed.
+        NAEXECDATA = NAEXECDATA or {commands = {}, args = {}}
+
+        -- Clear any old commands in NAEXECDATA.commands if you want only the new ones
+        -- OR, if you want to ADD to existing commands, skip this clear.
+        -- For robust behavior, clearing is usually safer.
+        NAEXECDATA.commands = {}
+        NAEXECDATA.args = {} -- Clear args too, as they correspond to command names
+
+        -- Iterate through the commands registered in your loaded system (_G.cmd.Commands)
+        -- and add them to NAEXECDATA.commands
+        if _G.cmd and type(_G.cmd) == "table" and type(_G.cmd.Commands) == "table" then
+            for cmdName, cmdData in pairs(_G.cmd.Commands) do
+                table.insert(NAEXECDATA.commands, cmdName)
+
+                -- Populate NAEXECDATA.args for this command if it needs default arguments.
+                -- The `Spawn` loop uses `NAEXECDATA.args[commandName]`.
+                -- If your commands in the external script don't need default arguments
+                -- when run via NAEXECDATA, you can set it to an empty string.
+                -- Otherwise, you'd need a way to store default args in your cmd.add data.
+                NAEXECDATA.args[cmdName] = "" -- Default empty string for arguments
+            end
+
+            -- You might want to also add aliases if NAEXECDATA is meant to execute aliases too.
+            -- Typically, NAEXECDATA.commands lists primary command names.
+            -- if type(_G.cmd.Aliases) == "table" then
+            --     for aliasName, aliasData in pairs(_G.cmd.Aliases) do
+            --         table.insert(NAEXECDATA.commands, aliasName)
+            --         NAEXECDATA.args[aliasName] = ""
+            --     end
+            -- end
+
+            print("NAEXECDATA.commands populated with " .. #NAEXECDATA.commands .. " commands from the external script.")
+        else
+            warn("Could not access _G.cmd.Commands to populate NAEXECDATA.")
+        end
+
     else
         warn("Error running commands script: " .. returned_cmd_table)
     end
@@ -10757,6 +10802,24 @@ else
     warn("Error loading commands script content: " .. chunk_or_error_msg)
 end
 
+-- (4) -- Your existing 'local cmd = _G.cmd or {}' at the very top of the script
+-- ... (ensure this is present and correct) ...
+
+-- (5) -- Your existing Spawn loop (it will now correctly use the populated NAEXECDATA.commands)
+-- Spawn(function()
+-- 		Wait(.5)
+-- 		for _, commandName in ipairs(NAEXECDATA.commands) do
+-- 			local fullRun = {commandName}
+-- 			local argsString = NAEXECDATA.args[commandName]
+-- 			if argsString and argsString ~= "" then
+-- 				local extraArgs = ParseArguments(argsString)
+-- 				for _, v in ipairs(extraArgs) do
+-- 					Insert(fullRun, v)
+-- 				end
+-- 			end
+-- 			cmd.run(fullRun) -- This now uses _G.cmd.run, and gets commands from the populated NAEXECDATA
+-- 		end
+-- 	end)
 -- After this block, _G.cmd should now hold your external command system.
 
 
