@@ -10742,7 +10742,7 @@ end)
 -- ... (ensure they are defined) ...
 
 -- (2) -- Your existing code to load the external commands script
-local commandScriptContent = game:HttpGet("https://raw.githubusercontent.com/AzureEpic/orion/refs/heads/main/n.lua") -- VERIFY THIS URL
+local commandScriptContent = game:HttpGet("https://raw.githubusercontent.com/AzureEpic/orion/refs/heads/main/customcmds.lua") -- VERIFY THIS URL
 local success, chunk_or_error_msg = pcall(loadstring, commandScriptContent)
 
 if success then
