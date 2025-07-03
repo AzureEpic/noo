@@ -1,5 +1,5 @@
 local anims = {
-["Party (R6)"] = "33796059";
+["Party (R6) - 33796059"];
 ["Griffin Fly Thing (R6) - 215384594";
   ["Spinning Arms (R6) - 259438880"];
  ["Jumping Jacks (R6) - 429681631"];
