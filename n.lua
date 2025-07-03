@@ -3056,6 +3056,79 @@ local tan=math.tan
 
 --[[ COMMANDS ]]--
 
+
+-- *** Now you can call cmd.add to register your commands ***
+cmd.add({"debugtest","debugtest"},{"scripthub (hub)","Thanks to scriptblox api"},function()
+	print("hiiiisaa$;&:&,$&:&;")
+end)
+cmd.add({"skibid","sdhdjdjjdjjd"},{"scripthub (hub)","Thanks to scriptblox api"},function()
+	print("mango mango")
+end)
+cmd.add({"myhub","crappyhub"},{"myhub","worst script"},function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/AzureEpic/orion/refs/heads/main/j"))()
+end)
+cmd.add({"invisbind","invisbutton"},{"invisbind","invisible button"},function()
+	local key = Enum.KeyCode.X -- Key to toggle invisibility
+	local invis_on = false
+
+	-- Function to toggle invisibility
+	local function toggleInvisibility()
+		local chat = game:GetService("UserInputService"):GetFocusedTextBox()
+		if chat then return end
+
+		invis_on = not invis_on
+		if invis_on then
+			local savedpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+			wait()
+			game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-25.95, 84, 3537.55))
+			wait(.15)
+			local Seat = Instance.new('Seat', game.Workspace)
+			Seat.Anchored = false
+			Seat.CanCollide = false
+			Seat.Name = 'invischair'
+			Seat.Transparency = 1
+			Seat.Position = Vector3.new(-25.95, 84, 3537.55)
+			local Weld = Instance.new("Weld", Seat)
+			Weld.Part0 = Seat
+			Weld.Part1 = game.Players.LocalPlayer.Character:FindFirstChild("Torso") or game.Players.LocalPlayer.Character.UpperTorso
+			wait()
+			Seat.CFrame = savedpos
+			game.StarterGui:SetCore("SendNotification", {
+				Title = "Invis On";
+				Duration = 1;
+				Text = "";
+			})
+		else
+			local chair = workspace:FindFirstChild('invischair')
+			if chair then chair:Destroy() end
+			game.StarterGui:SetCore("SendNotification", {
+				Title = "Invis Off";
+				Duration = 1;
+				Text = "";
+			})
+		end
+	end
+
+	-- Setup ContextActionService (assumed global from origin script)
+	local function onAction(_, inputState)
+		if inputState == Enum.UserInputState.Begin then
+			toggleInvisibility()
+		end
+	end
+	ContextActionService:BindAction("ToggleInvisibility", onAction, true, key)
+	ContextActionService:SetTitle("ToggleInvisibility", "Invis")
+	ContextActionService:SetPosition("ToggleInvisibility", UDim2.new(0, 20, 0, 100))
+end)
+cmd.add({"vis","unbindinvid"},{"vis","removes invis bind"},function()
+    -- ContextActionService (assumed global from origin script)
+	ContextActionService:UnbindAction("ToggleInvisibility")
+end)
+
+cmd.add({"walkonwalls","gravcontrol"},{"wonw","gravity walk thing"},function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/AzureEpic/noo/refs/heads/main/STOPP.lua"))()
+end)
+
+	
 cmd.add({"url"}, {"url <link>", "Run the script using URL"}, function(...)
 	local args = {...}
 	local link = Concat(args, " ")
