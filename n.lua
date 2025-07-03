@@ -10734,39 +10734,22 @@ end)
 
 
 
+
+
 -- In your Origin Script
 
--- ... (your existing global definitions and loading logic up to this point) ...
+-- (1) -- Your existing global definitions and utility functions (didYouMean, Window, Spawn, etc.)
+-- ... (ensure they are defined) ...
 
-local commandScriptContent = game:HttpGet("https://raw.githubusercontent.com/AzureEpic/noo/refs/heads/main/your_commands_script.lua")
-
--- --- DEBUG PRINTS START ---
-print("DEBUG: commandScriptContent type:", type(commandScriptContent))
-print("DEBUG: commandScriptContent length:", #tostring(commandScriptContent)) -- Check length, 0 means empty
-if type(commandScriptContent) ~= "string" then
-    warn("DEBUG: commandScriptContent is NOT a string. Value:", tostring(commandScriptContent))
-end
--- --- DEBUG PRINTS END ---
-
+-- (2) -- Your existing code to load the external commands script
+local commandScriptContent = loadstring(game:HttpGet("https://raw.githubusercontent.com/AzureEpic/orion/refs/heads/main/customcmds.lua"))() -- VERIFY THIS URL
 local success, chunk_or_error_msg = pcall(loadstring, commandScriptContent)
 
--- --- DEBUG PRINTS START ---
-print("DEBUG: pcall success:", success)
-print("DEBUG: pcall chunk_or_error_msg type:", type(chunk_or_error_msg))
-print("DEBUG: pcall chunk_or_error_msg value:", tostring(chunk_or_error_msg)) -- If it's a function, it'll print "function: 0x..."
--- --- DEBUG PRINTS END ---
-
-
 if success then
-    -- --- DEBUG PRINTS START ---
-    if chunk_or_error_msg == nil then
-        warn("CRITICAL ERROR: loadstring succeeded (pcall=true) but returned a NIL chunk!")
-    end
-    -- --- DEBUG PRINTS END ---
-
     local origin_env = getfenv(0)
-    setfenv(chunk_or_error_msg, origin_env) -- The error happens here if chunk_or_error_msg is nil
-   local runSuccess, returned_cmd_table = pcall(chunk_or_error_msg)
+    setfenv(chunk_or_error_msg, origin_env)
+
+    local runSuccess, returned_cmd_table = pcall(chunk_or_error_msg)
     if runSuccess then
         -- This step is correct: Make your loaded command system available globally
         _G.cmd = returned_cmd_table
@@ -10811,14 +10794,13 @@ if success then
         else
             warn("Could not access _G.cmd.Commands to populate NAEXECDATA.")
         end
+
+    else
+        warn("Error running commands script: " .. returned_cmd_table)
+    end
 else
-    warn("Error loading commands script content (loadstring failed): " .. chunk_or_error_msg)
+    warn("Error loading commands script content: " .. chunk_or_error_msg)
 end
-
-
-
-
-
 
 -- (4) -- Your existing 'local cmd = _G.cmd or {}' at the very top of the script
 -- ... (ensure this is present and correct) ...
