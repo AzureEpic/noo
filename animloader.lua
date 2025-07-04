@@ -891,6 +891,66 @@ end)
 
 
 
+
+
+
+
+
+
+
+-- Create the tool
+local tool = Instance.new("Tool")
+tool.Name = "OPM"
+tool.RequiresHandle = false
+tool.Parent = backpack
+
+        writefile("opm.mp3", game:HttpGet("https://github.com/AzureEpic/noo/raw/refs/heads/main/sounds/opm.mp3"))
+-- Load Animator if not already loaded
+if not getgenv()["Animator"] then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
+    end
+
+local Anim = nil
+local sound = nil
+
+tool.Equipped:Connect(function()
+    local character = player.Character
+    if character then
+        Anim = Animator.new(character, 132984799748032)
+        Anim:Play()
+        Anim.Stopped:Connect(function()
+            Anim:Play()
+        end)
+        sound = Instance.new("Sound")
+        sound.SoundId = getcustomasset("opm.mp3")
+        sound.Volume = 2
+        sound.Looped = true
+        sound.Parent = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+        sound:Play()
+    end
+end)
+
+tool.Unequipped:Connect(function()
+    if Anim then
+        Anim:Stop()
+        Anim:Destroy()
+    end
+    if sound then
+        sound:Stop()
+        sound:Destroy()
+    end
+    print("Dance 6 and music stopped")
+end)
+
+
+
+
+
+
+		
+
+
+
 -- Dance 7 (Mannrobics)
 local player = game.Players.LocalPlayer
 local backpack = player:WaitForChild("Backpack")
