@@ -9,7 +9,7 @@ game:GetService("ReplicatedStorage"):WaitForChild("money"):FireServer(unpack(arg
 
 local args = {
     [1] = "PurchaseItem",
-    [2] = "BeachBall"
+    [2] = "Firework"
 }
 
 game:GetService("ReplicatedStorage"):WaitForChild("NetworkEvent"):FireServer(unpack(args))
