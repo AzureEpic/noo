@@ -288,3 +288,98 @@ tool.Unequipped:Connect(function()
 	end
 	print("gadfsdfsfs and music stopped")
 end)
+
+
+
+
+local tool = Instance.new("Tool")
+tool.Name = "Limb Line"
+tool.RequiresHandle = false
+tool.Parent = backpack
+
+writefile("p.mp3", game:HttpGet("https://github.com/AzureEpic/noo/blob/main/sounds/opm.mp3"))
+-- Load Animator if not already loaded
+if not getgenv()["Animator"] then
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
+end
+
+local Anim = nil
+local sound = nil
+
+tool.Equipped:Connect(function()
+	local character = player.Character
+	if character then
+		Anim = Animator.new(character, 118054103869881)
+		Anim:Play()
+		Anim.Stopped:Connect(function()
+			Anim:Play()
+		end)
+		sound = Instance.new("Sound")
+		sound.SoundId = getcustomasset("p.mp3")
+		sound.Volume = 2
+		sound.Looped = true
+		sound.Parent = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+		sound:Play()
+	end
+end)
+
+tool.Unequipped:Connect(function()
+	if Anim then
+		Anim:Stop()
+		Anim:Destroy()
+	end
+	if sound then
+		sound:Stop()
+		sound:Destroy()
+	end
+	print("gadfsdfsfs and music stopped")
+end)
+
+
+
+
+
+
+
+local tool = Instance.new("Tool")
+tool.Name = "Tall Line"
+tool.RequiresHandle = false
+tool.Parent = backpack
+
+writefile("p.mp3", game:HttpGet("https://github.com/AzureEpic/noo/blob/main/sounds/opm.mp3"))
+-- Load Animator if not already loaded
+if not getgenv()["Animator"] then
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
+end
+
+local Anim = nil
+local sound = nil
+
+tool.Equipped:Connect(function()
+	local character = player.Character
+	if character then
+		Anim = Animator.new(character, 93352902645060)
+		Anim:Play()
+		Anim.Stopped:Connect(function()
+			Anim:Play()
+		end)
+		sound = Instance.new("Sound")
+		sound.SoundId = getcustomasset("p.mp3")
+		sound.Volume = 2
+		sound.Looped = true
+		sound.Parent = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+		sound:Play()
+	end
+end)
+
+tool.Unequipped:Connect(function()
+	if Anim then
+		Anim:Stop()
+		Anim:Destroy()
+	end
+	if sound then
+		sound:Stop()
+		sound:Destroy()
+	end
+	print("gadfsdfsfs and music stopped")
+end)
