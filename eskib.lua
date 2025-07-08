@@ -808,7 +808,7 @@ end)]]
 
 
 local tool = Instance.new("Tool")
-tool.Name = "Pp"
+tool.Name = "Pp 2"
 tool.RequiresHandle = false
 tool.Parent = backpack
 
