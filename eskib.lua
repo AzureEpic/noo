@@ -12,7 +12,7 @@ tool.RequiresHandle = false
 tool.Parent = backpack
 
 if not getgenv()["Animator"] then
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/AzureEpic/noo/refs/heads/main/anims/api.lua"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/AzureEpic/noo/refs/heads/main/anims/Main.lua"))()
 end
 
 writefile("IWRA.mp3", game:HttpGet("https://github.com/gObl00x/Epik-Musics/raw/refs/heads/main/IWRA.mp3"))
