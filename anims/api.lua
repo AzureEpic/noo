@@ -1,4 +1,4 @@
-local pathToGithub = "https://raw.githubusercontent.com/xhayper/Animator/main/Source/"
+local pathToGithub = "https://raw.githubusercontent.com/AzureEpic/noo/refs/heads/main/anims/"
 
 local sub = string.sub
 
