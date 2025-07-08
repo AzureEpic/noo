@@ -853,7 +853,7 @@ end)
 
 
 local tool = Instance.new("Tool")
-tool.Name = "Pp"
+tool.Name = "JoJo pose ahh"
 tool.RequiresHandle = false
 tool.Parent = backpack
 
