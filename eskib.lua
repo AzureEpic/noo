@@ -1,9 +1,3 @@
--- gObl00x Notification
-game:GetService("StarterGui"):SetCore("SendNotification", { 
-	Title = "have you ever played bloxfruits";
-	Text = "with your life on the line";
-	Icon = "rbxthumb://type=Asset&id=126389658690593&w=150&h=150"})
-Duration = 15;
 
 
 
@@ -17,11 +11,13 @@ tool.Name = "I WANNA RUN AWAY🗣️"
 tool.RequiresHandle = false
 tool.Parent = backpack
 
+if not getgenv()["Animator"] then
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/AzureEpic/noo/refs/heads/main/anims/api.lua"))()
+end
+
 writefile("IWRA.mp3", game:HttpGet("https://github.com/gObl00x/Epik-Musics/raw/refs/heads/main/IWRA.mp3"))
 -- Load Animator if not already loaded
-if not getgenv()["Animator"] then
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
-end
+
 
 local Anim = nil
 local sound = nil
@@ -65,9 +61,8 @@ tool.Parent = backpack
 
 writefile("mp3.mp3", game:HttpGet("https://github.com/AzureEpic/noo/blob/main/sounds/opm.mp3"))
 -- Load Animator if not already loaded
-if not getgenv()["Animator"] then
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
-end
+
+
 
 local Anim = nil
 local sound = nil
@@ -110,9 +105,6 @@ tool.Parent = backpack
 
 writefile("p.mp3", game:HttpGet("https://github.com/AzureEpic/noo/blob/main/sounds/opm.mp3"))
 -- Load Animator if not already loaded
-if not getgenv()["Animator"] then
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
-end
 
 local Anim = nil
 local sound = nil
@@ -154,9 +146,7 @@ tool.Parent = backpack
 
 writefile("p.mp3", game:HttpGet("https://github.com/AzureEpic/noo/blob/main/sounds/opm.mp3"))
 -- Load Animator if not already loaded
-if not getgenv()["Animator"] then
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
-end
+
 
 local Anim = nil
 local sound = nil
@@ -206,9 +196,7 @@ tool.Parent = backpack
 
 writefile("p.mp3", game:HttpGet("https://github.com/AzureEpic/noo/blob/main/sounds/opm.mp3"))
 -- Load Animator if not already loaded
-if not getgenv()["Animator"] then
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
-end
+
 
 local Anim = nil
 local sound = nil
@@ -253,9 +241,7 @@ tool.Parent = backpack
 
 writefile("p.mp3", game:HttpGet("https://github.com/AzureEpic/noo/blob/main/sounds/opm.mp3"))
 -- Load Animator if not already loaded
-if not getgenv()["Animator"] then
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
-end
+
 
 local Anim = nil
 local sound = nil
@@ -299,9 +285,7 @@ tool.Parent = backpack
 
 writefile("p.mp3", game:HttpGet("https://github.com/AzureEpic/noo/blob/main/sounds/opm.mp3"))
 -- Load Animator if not already loaded
-if not getgenv()["Animator"] then
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
-end
+
 
 local Anim = nil
 local sound = nil
@@ -348,9 +332,7 @@ tool.Parent = backpack
 
 writefile("p.mp3", game:HttpGet("https://github.com/AzureEpic/noo/blob/main/sounds/opm.mp3"))
 -- Load Animator if not already loaded
-if not getgenv()["Animator"] then
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
-end
+
 
 local Anim = nil
 local sound = nil
@@ -394,9 +376,7 @@ tool.Parent = backpack
 
 writefile("p.mp3", game:HttpGet("https://github.com/AzureEpic/noo/blob/main/sounds/opm.mp3"))
 -- Load Animator if not already loaded
-if not getgenv()["Animator"] then
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
-end
+
 
 local Anim = nil
 local sound = nil
@@ -442,9 +422,7 @@ tool.Parent = backpack
 
 writefile("p.mp3", game:HttpGet("https://github.com/AzureEpic/noo/blob/main/sounds/opm.mp3"))
 -- Load Animator if not already loaded
-if not getgenv()["Animator"] then
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
-end
+
 
 local Anim = nil
 local sound = nil
@@ -487,9 +465,7 @@ tool.Parent = backpack
 
 writefile("p.mp3", game:HttpGet("https://github.com/AzureEpic/noo/blob/main/sounds/opm.mp3"))
 -- Load Animator if not already loaded
-if not getgenv()["Animator"] then
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
-end
+
 
 local Anim = nil
 local sound = nil
@@ -535,9 +511,6 @@ tool.Parent = backpack
 
 writefile("p.mp3", game:HttpGet("https://github.com/AzureEpic/noo/blob/main/sounds/opm.mp3"))
 -- Load Animator if not already loaded
-if not getgenv()["Animator"] then
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
-end
 
 local Anim = nil
 local sound = nil
@@ -581,9 +554,7 @@ tool.Parent = backpack
 
 writefile("p.mp3", game:HttpGet("https://github.com/AzureEpic/noo/blob/main/sounds/opm.mp3"))
 -- Load Animator if not already loaded
-if not getgenv()["Animator"] then
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
-end
+
 
 local Anim = nil
 local sound = nil
@@ -627,9 +598,7 @@ tool.Parent = backpack
 
 writefile("p.mp3", game:HttpGet("https://github.com/AzureEpic/noo/blob/main/sounds/opm.mp3"))
 -- Load Animator if not already loaded
-if not getgenv()["Animator"] then
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
-end
+
 
 local Anim = nil
 local sound = nil
@@ -675,9 +644,7 @@ tool.Parent = backpack
 
 writefile("p.mp3", game:HttpGet("https://github.com/AzureEpic/noo/blob/main/sounds/opm.mp3"))
 -- Load Animator if not already loaded
-if not getgenv()["Animator"] then
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
-end
+
 
 local Anim = nil
 local sound = nil
@@ -723,9 +690,7 @@ tool.Parent = backpack
 
 writefile("p.mp3", game:HttpGet("https://github.com/AzureEpic/noo/blob/main/sounds/opm.mp3"))
 -- Load Animator if not already loaded
-if not getgenv()["Animator"] then
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
-end
+
 
 local Anim = nil
 local sound = nil
@@ -814,9 +779,7 @@ tool.Parent = backpack
 
 writefile("p.mp3", game:HttpGet("https://github.com/AzureEpic/noo/blob/main/sounds/opm.mp3"))
 -- Load Animator if not already loaded
-if not getgenv()["Animator"] then
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
-end
+
 
 local Anim = nil
 local sound = nil
@@ -859,9 +822,6 @@ tool.Parent = backpack
 
 writefile("p.mp3", game:HttpGet("https://github.com/AzureEpic/noo/blob/main/sounds/opm.mp3"))
 -- Load Animator if not already loaded
-if not getgenv()["Animator"] then
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
-end
 
 local Anim = nil
 local sound = nil
@@ -906,9 +866,7 @@ tool.Parent = backpack
 
 writefile("p.mp3", game:HttpGet("https://github.com/AzureEpic/noo/blob/main/sounds/opm.mp3"))
 -- Load Animator if not already loaded
-if not getgenv()["Animator"] then
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
-end
+
 
 local Anim = nil
 local sound = nil
@@ -953,9 +911,7 @@ tool.Parent = backpack
 
 writefile("p.mp3", game:HttpGet("https://github.com/AzureEpic/noo/blob/main/sounds/opm.mp3"))
 -- Load Animator if not already loaded
-if not getgenv()["Animator"] then
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
-end
+
 
 local Anim = nil
 local sound = nil
@@ -1000,10 +956,6 @@ tool.RequiresHandle = false
 tool.Parent = backpack
 
 writefile("p.mp3", game:HttpGet("https://github.com/AzureEpic/noo/blob/main/sounds/opm.mp3"))
--- Load Animator if not already loaded
-if not getgenv()["Animator"] then
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
-end
 
 local Anim = nil
 local sound = nil
