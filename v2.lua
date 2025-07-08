@@ -291,15 +291,7 @@ local function removeAnims(character)
 	end)
 end
 
-local conn
-conn = LocalPlayer.CharacterAdded:Connect(function(char)
-	removeAnims(char)
-	if conn then
-		conn:Disconnect()
-		conn = nil
-	end
-end)
-
+LocalPlayer.CharacterAdded:Once(removeAnims)
 
 LocalPlayer.Character.Archivable = true
 local originalChar = LocalPlayer.Character
