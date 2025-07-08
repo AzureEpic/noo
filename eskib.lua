@@ -63,7 +63,7 @@ tool.Name = "pp"
 tool.RequiresHandle = false
 tool.Parent = backpack
 
-writefile("p.mp3", game:HttpGet("https://github.com/AzureEpic/noo/blob/main/sounds/opm.mp3"))
+writefile("mp3.mp3", game:HttpGet("https://github.com/AzureEpic/noo/blob/main/sounds/opm.mp3"))
 -- Load Animator if not already loaded
 if not getgenv()["Animator"] then
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
@@ -126,7 +126,7 @@ tool.Equipped:Connect(function()
 			Anim:Play()
 		end)
 		sound = Instance.new("Sound")
-		sound.SoundId = getcustomasset("p.mp3")
+		sound.SoundId = getcustomasset("opm.mp3")
 		sound.Volume = 2
 		sound.Looped = true
 		sound.Parent = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
